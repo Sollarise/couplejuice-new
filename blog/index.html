@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Couplejuice Blog — Real Talk, Real Travel, Real Us</title>
+  <meta
+    name="description"
+    content="The Couplejuice blog: honest stories, practical tips, and behind-the-scenes moments from our life together."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ============================================
+       REUSING THE SAME TOKENS AS THE SQUEEZE PAGE
+       EXPLANATION: Consistency across pages builds
+       brand recognition. Same colors, same fonts.
+       ============================================ */
+    :root {
+      --clr-bg: #fffaf6;            /* very soft warm off-white */
+      --clr-surface: #ffffff;
+      --clr-text-primary: #2d1f1a;
+      --clr-text-secondary: #6b5147;
+      --clr-accent: #e85d3d;
+      --clr-accent-hover: #cf4a2d;
+      --clr-border: #ead9d0;
+
+      --ff-heading: "Fraunces", Georgia, serif;
+      --ff-body: "Inter", system-ui, -apple-system, sans-serif;
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+
+      --radius: 12px;
+      --shadow-sm: 0 2px 8px rgba(45, 31, 26, 0.06);
+      --shadow-md: 0 8px 24px rgba(45, 31, 26, 0.1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--ff-body);
+      background: var(--clr-bg);
+      color: var(--clr-text-primary);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       HEADER & NAVIGATION
+       EXPLANATION: The blog NEEDS navigation
+       (unlike the squeeze page). Users should
+       be able to jump to the freebie from here.
+       ============================================ */
+    .site-header {
+      background: var(--clr-surface);
+      border-bottom: 1px solid var(--clr-border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .logo {
+      font-family: var(--ff-heading);
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--clr-accent);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-md);
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--clr-text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--clr-accent);
+    }
+
+    /* The primary CTA in the header — points to the squeeze page */
+    .nav-cta {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      background: var(--clr-accent);
+      color: var(--clr-white);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      background: var(--clr-accent-hover);
+    }
+
+    /* ============================================
+       MAIN CONTENT AREA
+       ============================================ */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .page-title {
+      font-family: var(--ff-heading);
+      font-size: clamp(2rem, 4vw + 1rem, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+      color: var(--clr-text-secondary);
+      max-width: 55ch;
+      margin-bottom: var(--space-xl);
+    }
+
+    /* ============================================
+       BLOG POST GRID
+       EXPLANATION: CSS Grid with auto-fit and
+       minmax() creates a responsive card layout
+       without media queries. Container queries
+       would also work, but grid is simpler here.
+       ============================================ */
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .post-card {
+      background: var(--clr-surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    /* ============================================
+       IMAGE HANDLING
+       EXPLANATION:
+       - aspect-ratio prevents layout shift (CLS)
+       - object-fit: cover keeps images looking good
+       - loading="lazy" defers offscreen images
+       ============================================ */
+    .post-card img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      background: #f0e6e0; /* placeholder background while loading */
+    }
+
+    .post-card-body {
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      flex-grow: 1;
+    }
+
+    .post-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--clr-accent);
+    }
+
+    .post-card h2 {
+      font-family: var(--ff-heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .post-card h2 a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .post-card h2 a:hover {
+      color: var(--clr-accent);
+    }
+
+    .post-card p {
+      font-size: 0.9rem;
+      color: var(--clr-text-secondary);
+      flex-grow: 1;
+    }
+
+    .post-meta {
+      font-size: 0.8rem;
+      color: var(--clr-text-secondary);
+      margin-top: var(--space-xs);
+    }
+
+    /* ============================================
+       INLINE CTA BANNER (between posts)
+       EXPLANATION: A gentle nudge back to the
+       squeeze page — not aggressive, but present.
+       ============================================ */
+    .inline-cta {
+      background: linear-gradient(135deg, #fff4ec, #ffe3d3);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      text-align: center;
+      margin: var(--space-xl) 0;
+    }
+
+    .inline-cta h2 {
+      font-family: var(--ff-heading);
+      font-size: 1.5rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    .inline-cta p {
+      color: var(--clr-text-secondary);
+      margin-bottom: var(--space-md);
+      font-size: 0.95rem;
+    }
+
+    .inline-cta a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--clr-accent);
+      color: var(--clr-white);
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .inline-cta a:hover {
+      background: var(--clr-accent-hover);
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .site-footer {
+      border-top: 1px solid var(--clr-border);
+      padding: var(--space-lg) var(--space-md);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--clr-text-secondary);
+    }
+
+    /* ============================================
+       MOBILE NAVIGATION
+       EXPLANATION: On small screens, the nav
+       wraps. The CTA stays visible.
+       ============================================ */
+    @media (max-width: 600px) {
+      .header-inner {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .nav-links {
+        gap: var(--space-sm);
+      }
+
+      .page-title {
+        text-align: center;
+      }
+
+      .page-subtitle {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    SEMANTIC HEADER with navigation.
+    Unlike the squeeze page, the blog needs
+    navigation so readers can explore.
+  -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo">Couplejuice</a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/about">About</a></li>
+          <!-- The CTA points to the squeeze page -->
+          <li>
+            <a href="/free" class="nav-cta">Free Starter Kit</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Page heading with semantic hierarchy -->
+    <h1 class="page-title">Real talk. Real moments. Real us.</h1>
+    <p class="page-subtitle">
+      Honest stories, practical tips, and behind-the-scenes moments from our
+      life together — new posts every week.
+    </p>
+
+    <!--
+      POST GRID: Each card is an <article>.
+      This is semantic HTML — screen readers and
+      search engines understand it as a distinct
+      piece of content.
+    -->
+    <div class="post-grid">
+
+      <article class="post-card">
+        <img
+          src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80"
+          alt="Couple laughing together outdoors"
+          width="600"
+          height="338"
+          loading="lazy"
+        />
+        <div class="post-card-body">
+          <span class="post-tag">Vlog Life</span>
+          <h2><a href="/blog/how-we-started">How We Started Vlogging Together (And What We'd Do Differently)</a></h2>
+          <p>The honest truth about filming your first video as a couple — nerves, gear, and all.</p>
+          <span class="post-meta">5 min read</span>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <img
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
+          alt="Sunset over a calm beach"
+          width="600"
+          height="338"
+          loading="lazy"
+        />
+        <div class="post-card-body">
+          <span class="post-tag">Travel</span>
+          <h2><a href="/blog/budget-couple-travel">How We Travel as a Couple on a Budget</a></h2>
+          <p>Our favorite money-saving tricks for couples who want to see the world without breaking the bank.</p>
+          <span class="post-meta">7 min read</span>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <img
+          src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&q=80"
+          alt="Couple cooking together in a kitchen"
+          width="600"
+          height="338"
+          loading="lazy"
+        />
+        <div class="post-card-body">
+          <span class="post-tag">At Home</span>
+          <h2><a href="/blog/weekly-rituals">5 Weekly Rituals That Keep Us Connected</a></h2>
+          <p>Small habits that make a big difference — from Sunday cooking to phone-free evenings.</p>
+          <span class="post-meta">4 min read</span>
+        </div>
+      </article>
+
+    </div>
+
+    <!--
+      INLINE CTA: Gentle nudge back to the
+      squeeze page. Not intrusive, but present.
+    -->
+    <aside class="inline-cta">
+      <h2>Want the free Couple Vlog Starter Kit?</h2>
+      <p>Get our prompts, shot lists, and editing tips delivered to your inbox.</p>
+      <a href="/free">Get It Free →</a>
+    </aside>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Couplejuice. Made with love (and a little chaos).</p>
+  </footer>
+
+</body>
+</html>
