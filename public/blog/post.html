@@ -18,7 +18,6 @@
   />
 
   <style>
-    /* Same design tokens as the homepage for consistency */
     :root {
       --clr-bg: #fffaf6;
       --clr-surface: #ffffff;
@@ -27,22 +26,17 @@
       --clr-accent: #e85d3d;
       --clr-accent-hover: #cf4a2d;
       --clr-border: #ead9d0;
-
       --ff-heading: "Fraunces", Georgia, serif;
       --ff-body: "Inter", system-ui, -apple-system, sans-serif;
-
       --space-xs: 0.5rem;
       --space-sm: 1rem;
       --space-md: 1.5rem;
       --space-lg: 2.5rem;
       --space-xl: 4rem;
-
       --radius: 12px;
     }
 
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -52,10 +46,9 @@
       font-family: var(--ff-body);
       background: var(--clr-bg);
       color: var(--clr-text-primary);
-      line-height: 1.7; /* Slightly more line-height for long-form reading */
+      line-height: 1.7;
     }
 
-    /* Header — same as blog homepage */
     .site-header {
       background: var(--clr-surface);
       border-bottom: 1px solid var(--clr-border);
@@ -72,6 +65,7 @@
       align-items: center;
       justify-content: space-between;
       gap: var(--space-md);
+      flex-wrap: wrap;
     }
 
     .logo {
@@ -87,6 +81,7 @@
       display: flex;
       gap: var(--space-md);
       list-style: none;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
@@ -94,35 +89,42 @@
       color: var(--clr-text-secondary);
       font-size: 0.9rem;
       font-weight: 500;
+      transition: color 0.2s ease;
     }
+
+    .nav-links a:hover { color: var(--clr-accent); }
 
     .nav-cta {
       display: inline-block;
       padding: 0.5rem 1.25rem;
       background: var(--clr-accent);
-      color: var(--clr-white);
-      text-decoration: none;
+      color: #fff !important;
       border-radius: 8px;
-      font-size: 0.9rem;
       font-weight: 600;
+      white-space: nowrap;
+      transition: background 0.2s ease;
     }
 
-    /* ============================================
-       ARTICLE LAYOUT
-       EXPLANATION: The reading column is max 70ch
-       wide. This keeps lines at a comfortable
-       length (60–75 characters), which is critical
-       for readability on long-form posts.
-       ============================================ */
+    .nav-cta:hover { background: var(--clr-accent-hover); }
+
     .article-container {
-      max-width: 720px; /* ~65–70 characters per line */
+      max-width: 720px;
       margin: 0 auto;
       padding: var(--space-xl) var(--space-md);
     }
 
-    .article-header {
-      margin-bottom: var(--space-lg);
+    .back-link {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: var(--clr-text-secondary);
+      text-decoration: none;
+      margin-bottom: var(--space-md);
+      transition: color 0.2s ease;
     }
+
+    .back-link:hover { color: var(--clr-accent); }
+
+    .article-header { margin-bottom: var(--space-lg); }
 
     .article-tag {
       font-size: 0.75rem;
@@ -148,7 +150,6 @@
       color: var(--clr-text-secondary);
     }
 
-    /* Hero image */
     .article-hero {
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -156,15 +157,9 @@
       border-radius: var(--radius);
       margin-bottom: var(--space-lg);
       display: block;
+      background: #f0e6e0;
     }
 
-    /* ============================================
-       TYPOGRAPHY FOR LONG-FORM CONTENT
-       EXPLANATION:
-       - Headings use the serif font for hierarchy
-       - Paragraphs use the sans-serif for readability
-       - Spacing between elements is generous
-       ============================================ */
     .article-body h2 {
       font-family: var(--ff-heading);
       font-size: 1.5rem;
@@ -191,20 +186,15 @@
       text-underline-offset: 2px;
     }
 
-    .article-body a:hover {
-      color: var(--clr-accent-hover);
-    }
+    .article-body a:hover { color: var(--clr-accent-hover); }
 
     .article-body ul,
     .article-body ol {
       margin: 0 0 var(--space-sm) var(--space-md);
     }
 
-    .article-body li {
-      margin-bottom: var(--space-xs);
-    }
+    .article-body li { margin-bottom: var(--space-xs); }
 
-    /* Blockquote — for pull quotes and emphasis */
     .article-body blockquote {
       border-left: 3px solid var(--clr-accent);
       padding-left: var(--space-md);
@@ -213,12 +203,6 @@
       color: var(--clr-text-secondary);
     }
 
-    /* ============================================
-       END-OF-POST CTA
-       EXPLANATION: After reading a full post, the
-       reader is most engaged. This is the perfect
-       moment to offer the lead magnet.
-       ============================================ */
     .post-cta {
       background: linear-gradient(135deg, #fff4ec, #ffe3d3);
       border: 1px solid var(--clr-border);
@@ -232,6 +216,7 @@
       font-family: var(--ff-heading);
       font-size: 1.35rem;
       margin-bottom: var(--space-xs);
+      margin-top: 0;
     }
 
     .post-cta p {
@@ -244,17 +229,15 @@
       display: inline-block;
       padding: 0.75rem 1.5rem;
       background: var(--clr-accent);
-      color: var(--clr-white);
+      color: #fff;
       text-decoration: none;
       border-radius: 8px;
       font-weight: 600;
+      transition: background 0.2s ease;
     }
 
-    .post-cta a:hover {
-      background: var(--clr-accent-hover);
-    }
+    .post-cta a:hover { background: var(--clr-accent-hover); }
 
-    /* Footer */
     .site-footer {
       border-top: 1px solid var(--clr-border);
       padding: var(--space-lg) var(--space-md);
@@ -264,14 +247,7 @@
     }
 
     @media (max-width: 600px) {
-      .header-inner {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .nav-links {
-        gap: var(--space-sm);
-      }
+      .header-inner { justify-content: center; text-align: center; }
     }
   </style>
 </head>
@@ -283,20 +259,16 @@
       <nav aria-label="Main navigation">
         <ul class="nav-links">
           <li><a href="/blog/">Blog</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/free" class="nav-cta">Free Starter Kit</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/" class="nav-cta">Free Starter Kit</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!--
-    SEMANTIC ARTICLE:
-    - <article> wraps the whole post
-    - <header> holds the title and meta
-    - The reading column is max 720px wide
-  -->
   <article class="article-container">
+
+    <a href="/blog/" class="back-link">← Back to all posts</a>
 
     <header class="article-header">
       <span class="article-tag">Vlog Life</span>
@@ -306,11 +278,6 @@
       <p class="article-meta">By Couplejuice · 5 min read</p>
     </header>
 
-    <!--
-      HERO IMAGE with explicit width/height
-      to prevent layout shift. loading="eager"
-      because this image is above the fold.
-    -->
     <img
       class="article-hero"
       src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80"
@@ -360,11 +327,10 @@
 
     </div>
 
-    <!-- END-OF-POST CTA: The reader is engaged. Offer the freebie. -->
     <aside class="post-cta">
       <h2>Get the free Couple Vlog Starter Kit</h2>
       <p>Prompts, shot lists, and editing tips — delivered to your inbox.</p>
-      <a href="/free">Get It Free →</a>
+      <a href="/">Get It Free →</a>
     </aside>
 
   </article>
