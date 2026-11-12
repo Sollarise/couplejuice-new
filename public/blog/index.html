@@ -18,37 +18,27 @@
   />
 
   <style>
-    /* ============================================
-       REUSING THE SAME TOKENS AS THE SQUEEZE PAGE
-       EXPLANATION: Consistency across pages builds
-       brand recognition. Same colors, same fonts.
-       ============================================ */
     :root {
-      --clr-bg: #fffaf6;            /* very soft warm off-white */
+      --clr-bg: #fffaf6;
       --clr-surface: #ffffff;
       --clr-text-primary: #2d1f1a;
       --clr-text-secondary: #6b5147;
       --clr-accent: #e85d3d;
       --clr-accent-hover: #cf4a2d;
       --clr-border: #ead9d0;
-
       --ff-heading: "Fraunces", Georgia, serif;
       --ff-body: "Inter", system-ui, -apple-system, sans-serif;
-
       --space-xs: 0.5rem;
       --space-sm: 1rem;
       --space-md: 1.5rem;
       --space-lg: 2.5rem;
       --space-xl: 4rem;
-
       --radius: 12px;
       --shadow-sm: 0 2px 8px rgba(45, 31, 26, 0.06);
       --shadow-md: 0 8px 24px rgba(45, 31, 26, 0.1);
     }
 
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -61,12 +51,6 @@
       line-height: 1.6;
     }
 
-    /* ============================================
-       HEADER & NAVIGATION
-       EXPLANATION: The blog NEEDS navigation
-       (unlike the squeeze page). Users should
-       be able to jump to the freebie from here.
-       ============================================ */
     .site-header {
       background: var(--clr-surface);
       border-bottom: 1px solid var(--clr-border);
@@ -83,6 +67,7 @@
       align-items: center;
       justify-content: space-between;
       gap: var(--space-md);
+      flex-wrap: wrap;
     }
 
     .logo {
@@ -98,6 +83,7 @@
       display: flex;
       gap: var(--space-md);
       list-style: none;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
@@ -108,31 +94,21 @@
       transition: color 0.2s ease;
     }
 
-    .nav-links a:hover {
-      color: var(--clr-accent);
-    }
+    .nav-links a:hover { color: var(--clr-accent); }
 
-    /* The primary CTA in the header — points to the squeeze page */
     .nav-cta {
       display: inline-block;
       padding: 0.5rem 1.25rem;
       background: var(--clr-accent);
-      color: var(--clr-white);
-      text-decoration: none;
+      color: #fff !important;
       border-radius: 8px;
-      font-size: 0.9rem;
       font-weight: 600;
-      transition: background 0.2s ease;
       white-space: nowrap;
+      transition: background 0.2s ease;
     }
 
-    .nav-cta:hover {
-      background: var(--clr-accent-hover);
-    }
+    .nav-cta:hover { background: var(--clr-accent-hover); }
 
-    /* ============================================
-       MAIN CONTENT AREA
-       ============================================ */
     .container {
       max-width: 1100px;
       margin: 0 auto;
@@ -155,13 +131,6 @@
       margin-bottom: var(--space-xl);
     }
 
-    /* ============================================
-       BLOG POST GRID
-       EXPLANATION: CSS Grid with auto-fit and
-       minmax() creates a responsive card layout
-       without media queries. Container queries
-       would also work, but grid is simpler here.
-       ============================================ */
     .post-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -183,19 +152,12 @@
       transform: translateY(-3px);
     }
 
-    /* ============================================
-       IMAGE HANDLING
-       EXPLANATION:
-       - aspect-ratio prevents layout shift (CLS)
-       - object-fit: cover keeps images looking good
-       - loading="lazy" defers offscreen images
-       ============================================ */
     .post-card img {
       width: 100%;
       aspect-ratio: 16 / 9;
       object-fit: cover;
       display: block;
-      background: #f0e6e0; /* placeholder background while loading */
+      background: #f0e6e0;
     }
 
     .post-card-body {
@@ -225,11 +187,10 @@
     .post-card h2 a {
       text-decoration: none;
       color: inherit;
+      transition: color 0.2s ease;
     }
 
-    .post-card h2 a:hover {
-      color: var(--clr-accent);
-    }
+    .post-card h2 a:hover { color: var(--clr-accent); }
 
     .post-card p {
       font-size: 0.9rem;
@@ -243,11 +204,6 @@
       margin-top: var(--space-xs);
     }
 
-    /* ============================================
-       INLINE CTA BANNER (between posts)
-       EXPLANATION: A gentle nudge back to the
-       squeeze page — not aggressive, but present.
-       ============================================ */
     .inline-cta {
       background: linear-gradient(135deg, #fff4ec, #ffe3d3);
       border: 1px solid var(--clr-border);
@@ -273,20 +229,15 @@
       display: inline-block;
       padding: 0.75rem 1.5rem;
       background: var(--clr-accent);
-      color: var(--clr-white);
+      color: #fff;
       text-decoration: none;
       border-radius: 8px;
       font-weight: 600;
       transition: background 0.2s ease;
     }
 
-    .inline-cta a:hover {
-      background: var(--clr-accent-hover);
-    }
+    .inline-cta a:hover { background: var(--clr-accent-hover); }
 
-    /* ============================================
-       FOOTER
-       ============================================ */
     .site-footer {
       border-top: 1px solid var(--clr-border);
       padding: var(--space-lg) var(--space-md);
@@ -295,26 +246,9 @@
       color: var(--clr-text-secondary);
     }
 
-    /* ============================================
-       MOBILE NAVIGATION
-       EXPLANATION: On small screens, the nav
-       wraps. The CTA stays visible.
-       ============================================ */
     @media (max-width: 600px) {
-      .header-inner {
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
-      }
-
-      .nav-links {
-        gap: var(--space-sm);
-      }
-
-      .page-title {
-        text-align: center;
-      }
-
+      .header-inner { justify-content: center; text-align: center; }
+      .page-title { text-align: center; }
       .page-subtitle {
         text-align: center;
         margin-left: auto;
@@ -325,23 +259,14 @@
 </head>
 <body>
 
-  <!--
-    SEMANTIC HEADER with navigation.
-    Unlike the squeeze page, the blog needs
-    navigation so readers can explore.
-  -->
   <header class="site-header">
     <div class="header-inner">
       <a href="/" class="logo">Couplejuice</a>
-
       <nav aria-label="Main navigation">
         <ul class="nav-links">
           <li><a href="/blog/">Blog</a></li>
-          <li><a href="/about">About</a></li>
-          <!-- The CTA points to the squeeze page -->
-          <li>
-            <a href="/free" class="nav-cta">Free Starter Kit</a>
-          </li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/" class="nav-cta">Free Starter Kit</a></li>
         </ul>
       </nav>
     </div>
@@ -349,21 +274,15 @@
 
   <main class="container">
 
-    <!-- Page heading with semantic hierarchy -->
     <h1 class="page-title">Real talk. Real moments. Real us.</h1>
     <p class="page-subtitle">
       Honest stories, practical tips, and behind-the-scenes moments from our
       life together — new posts every week.
     </p>
 
-    <!--
-      POST GRID: Each card is an <article>.
-      This is semantic HTML — screen readers and
-      search engines understand it as a distinct
-      piece of content.
-    -->
     <div class="post-grid">
 
+      <!-- POST 1 — links to the sample post.html template -->
       <article class="post-card">
         <img
           src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80"
@@ -374,12 +293,13 @@
         />
         <div class="post-card-body">
           <span class="post-tag">Vlog Life</span>
-          <h2><a href="/blog/how-we-started">How We Started Vlogging Together (And What We'd Do Differently)</a></h2>
+          <h2><a href="/blog/post.html">How We Started Vlogging Together (And What We'd Do Differently)</a></h2>
           <p>The honest truth about filming your first video as a couple — nerves, gear, and all.</p>
           <span class="post-meta">5 min read</span>
         </div>
       </article>
 
+      <!-- POST 2 — placeholder, replace with real post when ready -->
       <article class="post-card">
         <img
           src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"
@@ -390,12 +310,13 @@
         />
         <div class="post-card-body">
           <span class="post-tag">Travel</span>
-          <h2><a href="/blog/budget-couple-travel">How We Travel as a Couple on a Budget</a></h2>
+          <h2><a href="/blog/post.html">How We Travel as a Couple on a Budget</a></h2>
           <p>Our favorite money-saving tricks for couples who want to see the world without breaking the bank.</p>
           <span class="post-meta">7 min read</span>
         </div>
       </article>
 
+      <!-- POST 3 — placeholder -->
       <article class="post-card">
         <img
           src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=600&q=80"
@@ -406,7 +327,7 @@
         />
         <div class="post-card-body">
           <span class="post-tag">At Home</span>
-          <h2><a href="/blog/weekly-rituals">5 Weekly Rituals That Keep Us Connected</a></h2>
+          <h2><a href="/blog/post.html">5 Weekly Rituals That Keep Us Connected</a></h2>
           <p>Small habits that make a big difference — from Sunday cooking to phone-free evenings.</p>
           <span class="post-meta">4 min read</span>
         </div>
@@ -414,14 +335,10 @@
 
     </div>
 
-    <!--
-      INLINE CTA: Gentle nudge back to the
-      squeeze page. Not intrusive, but present.
-    -->
     <aside class="inline-cta">
       <h2>Want the free Couple Vlog Starter Kit?</h2>
       <p>Get our prompts, shot lists, and editing tips delivered to your inbox.</p>
-      <a href="/free">Get It Free →</a>
+      <a href="/">Get It Free →</a>
     </aside>
 
   </main>
