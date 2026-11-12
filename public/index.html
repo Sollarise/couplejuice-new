@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+    EXPLANATION: The title and meta description are what appear in search
+    results and browser tabs. Even for a squeeze page, they matter for
+    professionalism and sharing.
+  -->
+  <title>Get the Free Couple Vlog Starter Kit — Couplejuice</title>
+  <meta
+    name="description"
+    content="Download the free 7-Day Couple Vlog Starter Kit: prompts, shot lists, and editing tips to help you create videos together."
+  />
+
+  <!--
+    EXPLANATION: Preconnect hints speed up font loading.
+    We're using Fraunces (warm serif for headlines) and Inter (clean sans for body).
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ============================================
+       1. DESIGN TOKENS (CSS CUSTOM PROPERTIES)
+       EXPLANATION: Tokens keep the design system
+       consistent. If you change a color or spacing
+       value here, it updates everywhere.
+       ============================================ */
+    :root {
+      /* Warm sunset palette — evokes the "golden hour" feel of couple vlogs */
+      --clr-bg-start: #fff4ec;      /* soft peach background */
+      --clr-bg-end: #ffe3d3;        /* warmer coral fade */
+      --clr-text-primary: #2d1f1a;  /* deep warm charcoal (not pure black) */
+      --clr-text-secondary: #6b5147;/* muted brown-grey for subtext */
+      --clr-accent: #e85d3d;        /* coral-orange for CTA button */
+      --clr-accent-hover: #cf4a2d;  /* darker coral on hover */
+      --clr-white: #ffffff;
+      --clr-error: #b3261e;         /* accessible red for error messages */
+
+      /* Typography scale */
+      --ff-heading: "Fraunces", Georgia, serif;
+      --ff-body: "Inter", system-ui, -apple-system, sans-serif;
+
+      /* Spacing scale (based on 0.25rem increments) */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+
+      --radius: 12px;
+      --shadow: 0 8px 30px rgba(45, 31, 26, 0.12);
+    }
+
+    /* ============================================
+       2. RESET & BASE STYLES
+       EXPLANATION: A minimal reset removes default
+       browser inconsistencies. box-sizing: border-box
+       makes sizing predictable.
+       ============================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      /* Smooth scrolling for anchor links, but respect reduced-motion preferences */
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    body {
+      font-family: var(--ff-body);
+      color: var(--clr-text-primary);
+      line-height: 1.6;
+      min-height: 100dvh; /* dvh handles mobile browser chrome correctly */
+      display: grid;
+      place-items: center; /* Centers the squeeze card vertically and horizontally */
+      padding: var(--space-md);
+
+      /* The warm gradient background — cinematic and inviting */
+      background: linear-gradient(
+        160deg,
+        var(--clr-bg-start) 0%,
+        var(--clr-bg-end) 100%
+      );
+    }
+
+    /* ============================================
+       3. THE SQUEEZE CARD
+       EXPLANATION: A single white card holds all
+       content. This creates visual focus — no
+       competing elements, no distractions.
+       ============================================ */
+    .squeeze-card {
+      width: 100%;
+      max-width: 560px; /* Comfortable reading width */
+      background: var(--clr-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--space-xl) var(--space-lg);
+      text-align: center;
+    }
+
+    /* ============================================
+       4. BRAND MARK
+       EXPLANATION: The logo/brand name only — no
+       navigation links. This is a squeeze page;
+       the only action is the form below.
+       ============================================ */
+    .brand {
+      font-family: var(--ff-heading);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      color: var(--clr-accent);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* ============================================
+       5. HEADLINE (the most important element)
+       EXPLANATION: 40–60% of conversion happens
+       at the headline. It should be specific,
+       outcome-focused, and mention the lead magnet.
+       ============================================ */
+    .headline {
+      font-family: var(--ff-heading);
+      font-weight: 700;
+      font-size: clamp(1.75rem, 4vw + 1rem, 2.75rem); /* Fluid type */
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .headline em {
+      font-style: normal;
+      color: var(--clr-accent); /* Highlight the key benefit */
+    }
+
+    /* ============================================
+       6. SUBHEADLINE
+       EXPLANATION: One sentence that qualifies the
+       audience and says exactly what's inside.
+       ============================================ */
+    .subheadline {
+      font-size: 1.05rem;
+      color: var(--clr-text-secondary);
+      max-width: 42ch; /* Keeps lines readable */
+      margin: 0 auto var(--space-lg);
+    }
+
+    /* ============================================
+       7. VISUAL PREVIEW (mockup of the lead magnet)
+       EXPLANATION: Showing what they get increases
+       perceived value. We use a styled HTML mockup
+       instead of an image — no extra asset needed.
+       ============================================ */
+    .preview {
+      background: linear-gradient(135deg, #fff4ec, #ffe3d3);
+      border: 1px dashed rgba(232, 93, 61, 0.35);
+      border-radius: var(--radius);
+      padding: var(--space-md);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-align: left;
+    }
+
+    .preview-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--clr-accent);
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: var(--clr-white);
+      font-size: 1.5rem;
+    }
+
+    .preview-text strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--clr-text-primary);
+    }
+
+    .preview-text span {
+      font-size: 0.85rem;
+      color: var(--clr-text-secondary);
+    }
+
+    /* ============================================
+       8. FORM & INPUT ACCESSIBILITY
+       EXPLANATION:
+       - Every input needs an associated <label>
+       - type="email" triggers browser validation
+       - aria-describedby connects the privacy note
+       - The button is 48px tall (≥44px touch target)
+       ============================================ */
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      text-align: left;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--clr-text-primary);
+    }
+
+    input[type="email"] {
+      width: 100%;
+      min-height: 48px; /* Touch-friendly */
+      padding: 0.75rem var(--space-sm);
+      font-family: var(--ff-body);
+      font-size: 1rem;
+      color: var(--clr-text-primary);
+      background: var(--clr-white);
+      border: 1.5px solid #d9c8c0;
+      border-radius: 8px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="email"]:focus {
+      outline: none;
+      border-color: var(--clr-accent);
+      box-shadow: 0 0 0 3px rgba(232, 93, 61, 0.2);
+    }
+
+    /* Accessible error styling: red border + text, not just color alone */
+    input[type="email"]:invalid:not(:placeholder-shown) {
+      border-color: var(--clr-error);
+    }
+
+    /* ============================================
+       9. CALL-TO-ACTION BUTTON
+       EXPLANATION:
+       - High contrast (white text on coral)
+       - Full-width for easy tapping
+       - First-person, action-oriented copy
+       ============================================ */
+    .cta-button {
+      width: 100%;
+      min-height: 52px;
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--ff-body);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--clr-white);
+      background: var(--clr-accent);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .cta-button:hover {
+      background: var(--clr-accent-hover);
+    }
+
+    .cta-button:active {
+      transform: scale(0.98);
+    }
+
+    .cta-button:focus-visible {
+      outline: 3px solid var(--clr-text-primary);
+      outline-offset: 2px;
+    }
+
+    /* ============================================
+       10. PRIVACY SIGNAL
+       EXPLANATION: Reduces friction. Tells visitors
+       they can trust you with their email.
+       ============================================ */
+    .privacy-note {
+      font-size: 0.8rem;
+      color: var(--clr-text-secondary);
+      text-align: center;
+      margin-top: var(--space-xs);
+    }
+
+    /* ============================================
+       11. RESPONSIVE ADJUSTMENTS
+       EXPLANATION: On very small screens, reduce
+       padding so the form stays above the fold.
+       ============================================ */
+    @media (max-width: 400px) {
+      .squeeze-card {
+        padding: var(--space-lg) var(--space-md);
+      }
+    }
+
+    /* ============================================
+       12. DECORATIVE HEART PARTICLES (optional, subtle)
+       EXPLANATION: A tiny nod to the "couple" theme.
+       Hidden from screen readers (aria-hidden).
+       Respects reduced-motion preferences.
+       ============================================ */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(232, 93, 61, 0.25);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+    .particle:nth-child(2) { top: 25%; left: 80%; animation-delay: 2s; }
+    .particle:nth-child(3) { top: 60%; left: 10%; animation-delay: 4s; }
+    .particle:nth-child(4) { top: 75%; left: 85%; animation-delay: 1s; }
+    .particle:nth-child(5) { top: 45%; left: 50%; animation-delay: 3s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+      50% { transform: translateY(-20px) scale(1.2); opacity: 0.8; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .particle {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Decorative floating particles — aria-hidden so screen readers ignore them -->
+  <div class="particles" aria-hidden="true">
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+    <span class="particle"></span>
+  </div>
+
+  <!--
+    The main squeeze card.
+    No <nav>, no <footer> links — only the form.
+  -->
+  <main class="squeeze-card">
+
+    <!-- Brand mark: logo/brand name only -->
+    <div class="brand">Couplejuice</div>
+
+    <!--
+      HEADLINE: Specific, outcome-focused.
+      The <em> highlights the key benefit.
+    -->
+    <h1 class="headline">
+      Get the <em>7-Day Couple Vlog Starter Kit</em>
+    </h1>
+
+    <!-- Subheadline: qualifies the audience and says what's inside -->
+    <p class="subheadline">
+      The exact prompts, shot lists, and editing tips we use to create videos
+      together — free for you.
+    </p>
+
+    <!-- Visual preview: shows the value before asking for the email -->
+    <div class="preview" aria-hidden="true">
+      <div class="preview-icon">📘</div>
+      <div class="preview-text">
+        <strong>Free PDF + Notion Template</strong>
+        <span>24 pages · Instant download</span>
+      </div>
+    </div>
+
+    <!--
+      THE FORM.
+      EXPLANATION:
+      - action: where the form submits. We'll use Formspree
+        (or a Cloudflare Pages Function) to handle this.
+      - method="POST" for privacy.
+      - type="email" triggers native HTML5 validation.
+      - required ensures the field isn't empty.
+      - aria-describedby connects the privacy note.
+    -->
+    <form
+      class="signup-form"
+      action="https://formspree.io/f/YOUR_FORM_ID"
+      method="POST"
+    >
+
+      <div class="form-group">
+        <label for="email">Your best email address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          required
+          autocomplete="email"
+          spellcheck="false"
+          aria-describedby="privacy-note"
+        />
+      </div>
+
+      <button type="submit" class="cta-button">
+        Yes, Send Me the Free Kit
+      </button>
+
+      <p class="privacy-note" id="privacy-note">
+        No spam. Unsubscribe anytime.
+      </p>
+
+    </form>
+
+  </main>
+
+</body>
+</html>
